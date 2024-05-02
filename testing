@@ -1,0 +1,23 @@
+import mysql.connector
+import json
+
+mydb = mysql.connector.connect(
+    host ='bdpspl67hpsxmkiiukdu-mysql.services.clever-cloud.com',
+    user ='u5fgsonwyoke5bff',
+    password='nHsZUdEJQ30AYtYXN6nF',
+    database='bdpspl67hpsxmkiiukdu',
+    port = '3306'
+)
+
+mycursor = mydb.cursor()
+try:
+            mycursor.execute("select distinct mainrole From userProfile;")
+            searchingdata = mycursor.fetchall()
+            numberofrow = mycursor.rowcount
+            if(numberofrow==0):
+                print("No table left")
+            else:
+                searchingresult = json.dumps(searchingdata)
+                print(searchingresult)
+except mysql.connector.Error as error:
+            print ("Failed")
